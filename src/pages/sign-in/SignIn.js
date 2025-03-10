@@ -13,10 +13,11 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
-import ForgotPassword from './components/ForgotPassword';
-import AppTheme from '../shared-theme/AppTheme.js';
-import ColorModeSelect from '../shared-theme/ColorModeSelect';
-import { GoogleIcon, FacebookIcon, SitemarkIcon } from './components/CustomIcons';
+import ForgotPassword from '../components/ForgotPassword.js';
+import AppTheme from '../../shared-theme/AppTheme.js';
+import ColorModeSelect from '../../shared-theme/ColorModeSelect.js';
+import { GoogleIcon, FacebookIcon, SitemarkIcon } from '../components/CustomIcons.js';
+import { Link as RouterLink } from "react-router-dom";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -214,13 +215,9 @@ export default function SignIn(props) {
             >
               Facebook으로 로그인하기
             </Button>
-            <Typography sx={{ textAlign: 'center' }}>
-              계정이 없으신분은 이쪽으로 → {' '}
-              <Link
-                href="/material-ui/getting-started/templates/sign-up/"
-                variant="body2"
-                sx={{ alignSelf: 'center' }}
-              >
+            <Typography sx={{ textAlign: "center" }}>
+              계정이 없으신 분은 이쪽으로 → {" "}
+              <Link component={RouterLink} to="/signup" variant="body2">
                 회원가입
               </Link>
             </Typography>
