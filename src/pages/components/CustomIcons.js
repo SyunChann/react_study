@@ -52,6 +52,19 @@ export function SitemarkIcon() {
   );
 }
 
+export function KakaoIcon(props) {
+  return (
+    <SvgIcon {...props} viewBox="0 0 222 49" sx={{ width: 'auto', height: 32 }}>
+      <image
+        href="/btn_kakao.svg"
+        width="222"
+        height="49"
+        preserveAspectRatio="xMidYMid meet"
+      />
+    </SvgIcon>
+  );
+}
+
 export function FacebookIcon() {
   return (
     <SvgIcon>

@@ -210,6 +210,20 @@ export default function SignIn(props) {
             <Button
               fullWidth
               variant="outlined"
+              onClick={() => alert('Sign in with KaKao')}
+              startIcon={
+                <img
+                  src="/btn_kakao.svg"
+                  alt="카카오 로고"
+                  style={{ width: 20, height: 20 }}
+                />
+              }
+            >
+              KaKao로 로그인하기
+            </Button>
+            <Button
+              fullWidth
+              variant="outlined"
               onClick={() => alert('Sign in with Facebook')}
               startIcon={<FacebookIcon />}
             >
