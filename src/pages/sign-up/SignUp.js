@@ -130,7 +130,7 @@ export default function SignUp(props) {
             variant="h4"
             sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
           >
-            Sign up
+            회원가입
           </Typography>
           <Box
             component="form"
@@ -138,21 +138,21 @@ export default function SignUp(props) {
             sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
           >
             <FormControl>
-              <FormLabel htmlFor="name">Full name</FormLabel>
+              <FormLabel htmlFor="name">이름</FormLabel>
               <TextField
                 autoComplete="name"
                 name="name"
                 required
                 fullWidth
                 id="name"
-                placeholder="Jon Snow"
+                placeholder="홍길동"
                 error={nameError}
                 helperText={nameErrorMessage}
                 color={nameError ? 'error' : 'primary'}
               />
             </FormControl>
             <FormControl>
-              <FormLabel htmlFor="email">Email</FormLabel>
+              <FormLabel htmlFor="email">이메일</FormLabel>
               <TextField
                 required
                 fullWidth
@@ -167,7 +167,7 @@ export default function SignUp(props) {
               />
             </FormControl>
             <FormControl>
-              <FormLabel htmlFor="password">Password</FormLabel>
+              <FormLabel htmlFor="password">비밀번호</FormLabel>
               <TextField
                 required
                 fullWidth
@@ -192,7 +192,7 @@ export default function SignUp(props) {
               variant="contained"
               onClick={validateInputs}
             >
-              Sign up
+              회원가입
             </Button>
           </Box>
           <Divider>
@@ -205,7 +205,7 @@ export default function SignUp(props) {
               onClick={() => alert('Sign up with Google')}
               startIcon={<GoogleIcon />}
             >
-              Sign up with Google
+              Google로 로그인하기.
             </Button>
             <Button
               fullWidth
@@ -230,13 +230,13 @@ export default function SignUp(props) {
               Sign up with Facebook
             </Button> */}
             <Typography sx={{ textAlign: 'center' }}>
-              Already have an account?{' '}
+              이미 계정이 있으십니까?{' '}
               <Link
                 href="/material-ui/getting-started/templates/sign-in/"
                 variant="body2"
                 sx={{ alignSelf: 'center' }}
               >
-                Sign in
+                로그인
               </Link>
             </Typography>
           </Box>
