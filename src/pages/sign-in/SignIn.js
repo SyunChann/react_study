@@ -19,6 +19,7 @@ import ColorModeSelect from '../../shared-theme/ColorModeSelect.js';
 import { GoogleIcon, SitemarkIcon } from '../components/CustomIcons.js';
 import { Link as RouterLink } from "react-router-dom";
 import { kakaoLogin } from '../../util/KaKaoLogin.js';
+import { googleLoginPopup } from '../../util/googleLogin.js';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -203,7 +204,7 @@ export default function SignIn(props) {
             <Button
               fullWidth
               variant="outlined"
-              onClick={() => alert('Sign in with Google')}
+              onClick={googleLoginPopup}
               startIcon={<GoogleIcon />}
             >
               Google으로 로그인하기

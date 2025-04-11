@@ -9,5 +9,5 @@ export default function KakaoRedirect() {
     }
   }, []);
 
-  return <p>로그인 처리 중...</p>;
+  return <p>KaKao 로그인 처리 중...</p>;
 }
