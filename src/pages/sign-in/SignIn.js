@@ -16,8 +16,9 @@ import { styled } from '@mui/material/styles';
 import ForgotPassword from '../components/ForgotPassword.js';
 import AppTheme from '../../shared-theme/AppTheme.js';
 import ColorModeSelect from '../../shared-theme/ColorModeSelect.js';
-import { GoogleIcon, FacebookIcon, SitemarkIcon } from '../components/CustomIcons.js';
+import { GoogleIcon, SitemarkIcon } from '../components/CustomIcons.js';
 import { Link as RouterLink } from "react-router-dom";
+import { kakaoLogin } from '../../util/KaKaoLogin.js';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -210,7 +211,7 @@ export default function SignIn(props) {
             <Button
               fullWidth
               variant="outlined"
-              onClick={() => alert('Sign in with KaKao')}
+              onClick={kakaoLogin}
               startIcon={
                 <img
                   src="/btn_kakao.svg"
@@ -221,14 +222,14 @@ export default function SignIn(props) {
             >
               KaKao로 로그인하기
             </Button>
-            <Button
+            {/* <Button
               fullWidth
               variant="outlined"
               onClick={() => alert('Sign in with Facebook')}
               startIcon={<FacebookIcon />}
             >
               Facebook으로 로그인하기
-            </Button>
+            </Button> */}
             <Typography sx={{ textAlign: "center" }}>
               계정이 없으신 분은 이쪽으로 → {" "}
               <Link component={RouterLink} to="/signup" variant="body2">

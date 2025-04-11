@@ -15,7 +15,7 @@ import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import AppTheme from '../../shared-theme/AppTheme.js';
 import ColorModeSelect from '../../shared-theme/ColorModeSelect.js';
-import { GoogleIcon, FacebookIcon, SitemarkIcon } from '../components/CustomIcons.js';
+import { GoogleIcon, SitemarkIcon } from '../components/CustomIcons.js';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -221,14 +221,14 @@ export default function SignUp(props) {
             >
               KaKao로 로그인하기
             </Button>
-            <Button
+            {/* <Button
               fullWidth
               variant="outlined"
               onClick={() => alert('Sign up with Facebook')}
               startIcon={<FacebookIcon />}
             >
               Sign up with Facebook
-            </Button>
+            </Button> */}
             <Typography sx={{ textAlign: 'center' }}>
               Already have an account?{' '}
               <Link
