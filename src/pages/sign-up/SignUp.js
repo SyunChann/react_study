@@ -16,6 +16,7 @@ import { styled } from '@mui/material/styles';
 import AppTheme from '../../shared-theme/AppTheme.js';
 import ColorModeSelect from '../../shared-theme/ColorModeSelect.js';
 import { GoogleIcon, SitemarkIcon } from '../components/CustomIcons.js';
+import axios from 'axios';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -104,18 +105,30 @@ export default function SignUp(props) {
     return isValid;
   };
 
-  const handleSubmit = (event) => {
-    if (nameError || emailError || passwordError) {
-      event.preventDefault();
-      return;
-    }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+  
+    if (!validateInputs()) return;
+  
     const data = new FormData(event.currentTarget);
-    console.log({
+    const user = {
       name: data.get('name'),
-      lastName: data.get('lastName'),
       email: data.get('email'),
       password: data.get('password'),
-    });
+    };
+  
+    try {
+      const response = await axios.post('http://localhost:5000/api/signup', user, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      alert(response.data.message); // ✅ "회원가입 성공" 메시지 출력
+    } catch (error) {
+      console.error('회원가입 실패:', error.response?.data || error.message);
+      alert(error.response?.data?.message || '회원가입 중 오류가 발생했습니다.');
+    }
   };
 
   return (
