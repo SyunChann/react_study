@@ -14,6 +14,7 @@ import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import { Link as RouterLink } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import AppTheme from '../../shared-theme/AppTheme.js';
 import ColorModeSelect from '../../shared-theme/ColorModeSelect.js';
 import { GoogleIcon, SitemarkIcon } from '../components/CustomIcons.js';
@@ -68,6 +69,7 @@ export default function SignUp(props) {
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
   const [nameError, setNameError] = React.useState(false);
   const [nameErrorMessage, setNameErrorMessage] = React.useState('');
+  const navigate = useNavigate(); // 컴포넌트 최상단에서만 호출해야함 !!
 
   const validateInputs = () => {
     const email = document.getElementById('email');
@@ -110,7 +112,7 @@ export default function SignUp(props) {
     event.preventDefault();
   
     if (!validateInputs()) return;
-  
+
     const data = new FormData(event.currentTarget);
     const user = {
       name: data.get('name'),
@@ -126,6 +128,7 @@ export default function SignUp(props) {
       });
   
       alert(response.data.message); // ✅ "회원가입 성공" 메시지 출력
+      navigate('/'); // navigate로 router에 등록된 메인 이동
     } catch (error) {
       console.error('회원가입 실패:', error.response?.data || error.message);
       alert(error.response?.data?.message || '회원가입 중 오류가 발생했습니다.');
@@ -219,7 +222,7 @@ export default function SignUp(props) {
               onClick={() => alert('Sign up with Google')}
               startIcon={<GoogleIcon />}
             >
-              Google로 로그인하기.
+              Google로 회원가입
             </Button>
             <Button
               fullWidth
@@ -233,7 +236,7 @@ export default function SignUp(props) {
                 />
               }
             >
-              KaKao로 로그인하기
+              KaKao로 회원가입
             </Button>
             {/* <Button
               fullWidth
@@ -253,7 +256,7 @@ export default function SignUp(props) {
                 로그인
               </Link> */}
               <Link component={RouterLink} to="/" variant="body2" sx={{ alignSelf: 'center' }}>
-                회원가입
+                로그인
               </Link>
             </Typography>
           </Box>
