@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
+import { Link as RouterLink } from "react-router-dom";
 import AppTheme from '../../shared-theme/AppTheme.js';
 import ColorModeSelect from '../../shared-theme/ColorModeSelect.js';
 import { GoogleIcon, SitemarkIcon } from '../components/CustomIcons.js';
@@ -244,12 +245,15 @@ export default function SignUp(props) {
             </Button> */}
             <Typography sx={{ textAlign: 'center' }}>
               이미 계정이 있으십니까?{' '}
-              <Link
+              {/* <Link
                 href="/material-ui/getting-started/templates/sign-in/"
                 variant="body2"
                 sx={{ alignSelf: 'center' }}
               >
                 로그인
+              </Link> */}
+              <Link component={RouterLink} to="/" variant="body2" sx={{ alignSelf: 'center' }}>
+                회원가입
               </Link>
             </Typography>
           </Box>
