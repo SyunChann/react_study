@@ -19,6 +19,7 @@ import AppTheme from '../../shared-theme/AppTheme.js';
 import ColorModeSelect from '../../shared-theme/ColorModeSelect.js';
 import { GoogleIcon, SitemarkIcon } from '../components/CustomIcons.js';
 import axios from 'axios';
+import { kakaoSignUp } from '../../util/KaKaoSignUp.js';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -227,7 +228,7 @@ export default function SignUp(props) {
             <Button
               fullWidth
               variant="outlined"
-              onClick={() => alert('Sign in with KaKao')}
+              onClick={kakaoSignUp}
               startIcon={
                 <img
                   src="/btn_kakao.svg"
