@@ -36,7 +36,8 @@ function loginWithKakao() {
   const kakaoKey = process.env.REACT_APP_KAKAO_JS_KEY;
   const redirectUri = 'http://localhost:3000/kakao-redirect'; // 등록된 redirect URI
 
-  const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoKey}&redirect_uri=${redirectUri}&response_type=code`;
+  const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoKey}&redirect_uri=${redirectUri}&response_type=code&scope=account_email,profile_nickname`;
+
 
   // ✅ 팝업 창으로 띄우기
   window.open(

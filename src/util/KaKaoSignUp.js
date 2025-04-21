@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 const kakaoKey = process.env.REACT_APP_KAKAO_JS_KEY;
 
 export function kakaoSignUp() {
