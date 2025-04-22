@@ -19,7 +19,7 @@ import AppTheme from '../../shared-theme/AppTheme.js';
 import ColorModeSelect from '../../shared-theme/ColorModeSelect.js';
 import { GoogleIcon, SitemarkIcon } from '../components/CustomIcons.js';
 import axios from 'axios';
-import { kakaoSignUp } from '../../util/KaKaoSignUp.js';
+import { KakaoAuth } from '../../util/kakaoAuth.js';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -228,7 +228,7 @@ export default function SignUp(props) {
             <Button
               fullWidth
               variant="outlined"
-              onClick={kakaoSignUp}
+              onClick={() => KakaoAuth('signup')}
               startIcon={
                 <img
                   src="/btn_kakao.svg"
@@ -239,14 +239,6 @@ export default function SignUp(props) {
             >
               KaKao로 회원가입
             </Button>
-            {/* <Button
-              fullWidth
-              variant="outlined"
-              onClick={() => alert('Sign up with Facebook')}
-              startIcon={<FacebookIcon />}
-            >
-              Sign up with Facebook
-            </Button> */}
             <Typography sx={{ textAlign: 'center' }}>
               이미 계정이 있으십니까?{' '}
               {/* <Link

@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SignIn from "./pages/sign-in/SignIn";
 import SignUp from "./pages/sign-up/SignUp";
-import KakaoRedirectPage from './pages/kakao-redirect';
+import KakaoRedirectPage from './pages/kakao/kakaoRedirectPage';
 
 function App() {
   return (

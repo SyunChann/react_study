@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import axios from 'axios';
 
-function KakaoRedirectPage() {
+function KakaoSignupRedirect() {
   useEffect(() => {
     const code = new URL(window.location.href).searchParams.get('code');
 
@@ -29,4 +29,4 @@ function KakaoRedirectPage() {
   return <div>회원가입 처리 중입니다...</div>;
 }
 
-export default KakaoRedirectPage;
+export default KakaoSignupRedirect;

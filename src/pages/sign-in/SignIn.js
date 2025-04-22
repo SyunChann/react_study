@@ -18,7 +18,7 @@ import AppTheme from '../../shared-theme/AppTheme.js';
 import ColorModeSelect from '../../shared-theme/ColorModeSelect.js';
 import { GoogleIcon, SitemarkIcon } from '../components/CustomIcons.js';
 import { Link as RouterLink } from "react-router-dom";
-import { kakaoLogin } from '../../util/KaKaoLogin.js';
+import { KakaoAuth } from '../../util/kakaoAuth.js';
 import { googleLoginPopup } from '../../util/googleLogin.js';
 
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -212,7 +212,7 @@ export default function SignIn(props) {
             <Button
               fullWidth
               variant="outlined"
-              onClick={kakaoLogin}
+              onClick={() => KakaoAuth('login')}
               startIcon={
                 <img
                   src="/btn_kakao.svg"
@@ -223,14 +223,6 @@ export default function SignIn(props) {
             >
               KaKao로 로그인하기
             </Button>
-            {/* <Button
-              fullWidth
-              variant="outlined"
-              onClick={() => alert('Sign in with Facebook')}
-              startIcon={<FacebookIcon />}
-            >
-              Facebook으로 로그인하기
-            </Button> */}
             <Typography sx={{ textAlign: "center" }}>
               계정이 없으신 분은 이쪽으로 → {" "}
               <Link component={RouterLink} to="/signup" variant="body2">
