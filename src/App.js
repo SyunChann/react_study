@@ -2,7 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SignIn from "./pages/sign-in/SignIn";
 import SignUp from "./pages/sign-up/SignUp";
-import KakaoRedirectPage from './pages/kakao/kakaoRedirectPage';
+import KakaoRedirect from './pages/redirect/kakaoRedirect';
+import GoogleRedirect from './pages/redirect/googleRedirect'
 
 function App() {
   return (
@@ -10,7 +11,8 @@ function App() {
       <Routes>
         <Route path="/" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/kakao-redirect" element={<KakaoRedirectPage />} />
+        <Route path="/kakao-redirect" element={<KakaoRedirect />} />
+        <Route path="/google-redirect" element={<GoogleRedirect />} />
       </Routes>
     </Router>
   );

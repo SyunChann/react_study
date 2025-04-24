@@ -20,6 +20,7 @@ import ColorModeSelect from '../../shared-theme/ColorModeSelect.js';
 import { GoogleIcon, SitemarkIcon } from '../components/CustomIcons.js';
 import axios from 'axios';
 import { KakaoAuth } from '../../util/kakaoAuth.js';
+import { GoogleAuth } from '../../util/googleAuth.js';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -220,7 +221,7 @@ export default function SignUp(props) {
             <Button
               fullWidth
               variant="outlined"
-              onClick={() => alert('Sign up with Google')}
+              onClick={() => GoogleAuth('signup')}
               startIcon={<GoogleIcon />}
             >
               Google로 회원가입
