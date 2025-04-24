@@ -40,11 +40,20 @@ function KakaoRedirect() {
         }
       })
       .catch(err => {
+        const status = err.response?.data?.status;
+      
+        if (status === 'not_found') {
+          alert('😢 등록되지 않은 계정입니다.\n회원가입 후 로그인해 주세요.');
+          window.close?.();
+          navigate('/');
+          return;
+        }
+      
         console.error(`${mode} 실패:`, err.response?.data || err.message);
         alert(`${mode === 'signup' ? '회원가입' : '로그인'} 중 문제가 발생했습니다.`);
         window.close?.();
         navigate('/');
-      });
+      });      
 
   }, [navigate]);
 
