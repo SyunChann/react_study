@@ -249,7 +249,7 @@ export default function SignUp(props) {
               >
                 로그인
               </Link> */}
-              <Link component={RouterLink} to="/" variant="body2" sx={{ alignSelf: 'center' }}>
+              <Link component={RouterLink} to="/signin" variant="body2" sx={{ alignSelf: 'center' }}>
                 로그인
               </Link>
             </Typography>
