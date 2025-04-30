@@ -13,11 +13,13 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 import ForgotPassword from '../components/ForgotPassword.js';
 import AppTheme from '../../shared-theme/AppTheme.js';
 import ColorModeSelect from '../../shared-theme/ColorModeSelect.js';
 import { GoogleIcon, SitemarkIcon } from '../components/CustomIcons.js';
 import { Link as RouterLink } from "react-router-dom";
+import axios from 'axios';
 import { KakaoAuth } from '../../util/kakaoAuth.js';
 import { GoogleAuth } from '../../util/googleAuth.js';
 
@@ -69,6 +71,7 @@ export default function SignIn(props) {
   const [passwordError, setPasswordError] = React.useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate(); 
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -78,16 +81,28 @@ export default function SignIn(props) {
     setOpen(false);
   };
 
-  const handleSubmit = (event) => {
-    if (emailError || passwordError) {
-      event.preventDefault();
-      return;
-    }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (!validateInputs()) return;
+
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    try {
+
+      const res = await axios.post('http://localhost:5000/api/login', {
+        email: data.get('email'),
+        password: data.get('password'),
+      });
+
+      const { token } = res.data;
+      localStorage.setItem('token', token);
+
+      alert('로그인 성공!');
+      navigate('/Home');
+
+    } catch (err) {
+      console.error('로그인 실패:', err.response?.data || err.message);
+      alert(err.response?.data?.message || '로그인 중 오류가 발생했습니다.');
+    }
   };
 
   const validateInputs = () => {
@@ -185,7 +200,6 @@ export default function SignIn(props) {
               type="submit"
               fullWidth
               variant="contained"
-              onClick={validateInputs}
             >
               로그인
             </Button>
