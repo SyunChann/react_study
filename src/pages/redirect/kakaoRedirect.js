@@ -16,10 +16,7 @@ function KakaoRedirect() {
     }
 
     axios.post('http://localhost:5000/api/auth/kakao', { code, mode })
-        /* 추후 확장성을 위한 user 추가 
-        localstorage 활용 가능 ... */        
-        // const { status, token, user } = res.data;
-        
+    
       .then(res => {
         const { token, status } = res.data;
         if (token) localStorage.setItem('token', token);
@@ -38,8 +35,14 @@ function KakaoRedirect() {
             alert('알 수 없는 상태입니다.');
         }
 
-        window.close?.();
-        navigate('/');
+        if (window.opener && !window.opener.closed) {
+          window.opener.localStorage.setItem('token', token);
+          window.opener.location.href = '/';
+          window.close();
+        } else {
+          navigate('/');
+        }
+        
       })
       .catch(err => {
         const status = err.response?.data?.status;

@@ -34,8 +34,14 @@ function GoogleRedirect() {
             alert('알 수 없는 상태입니다.');
         }
 
-        window.close?.();
-        navigate('/');
+        if (window.opener && !window.opener.closed) {
+          window.opener.localStorage.setItem('token', token);
+          window.opener.location.href = '/';
+          window.close();
+        } else {
+          navigate('/');
+        }
+        
       })
       .catch(err => {
         const status = err.response?.data?.status;
