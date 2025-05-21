@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { alpha, styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
@@ -53,41 +54,39 @@ export default function AppAppBar() {
           <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', px: 0 }}>
             <Sitemark />
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-              <Button variant="text" color="info" size="small">
-                Features
-              </Button>
-              <Button variant="text" color="info" size="small">
-                Testimonials
-              </Button>
-              <Button variant="text" color="info" size="small">
-                Highlights
-              </Button>
-              <Button variant="text" color="info" size="small">
-                Pricing
-              </Button>
-              <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }}>
-                FAQ
-              </Button>
-              <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }}>
-                Blog
-              </Button>
+              <Button variant="text" color="info" size="small">Features</Button>
+              <Button variant="text" color="info" size="small">Testimonials</Button>
+              <Button variant="text" color="info" size="small">Highlights</Button>
+              <Button variant="text" color="info" size="small">Pricing</Button>
+              <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }}>FAQ</Button>
+              <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }}>Blog</Button>
             </Box>
           </Box>
-          <Box
-            sx={{
-              display: { xs: 'none', md: 'flex' },
-              gap: 1,
-              alignItems: 'center',
-            }}
-          >
-            <Button color="primary" variant="text" size="small">
+
+          {/* desktop sign in / sign up */}
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1, alignItems: 'center' }}>
+            <Button
+              component={RouterLink}
+              to="/signin"
+              color="primary"
+              variant="text"
+              size="small"
+            >
               Sign in
             </Button>
-            <Button color="primary" variant="contained" size="small">
+            <Button
+              component={RouterLink}
+              to="/signup"
+              color="primary"
+              variant="contained"
+              size="small"
+            >
               Sign up
             </Button>
             <ColorModeIconDropdown />
           </Box>
+
+          {/* mobile menu */}
           <Box sx={{ display: { xs: 'flex', md: 'none' }, gap: 1 }}>
             <ColorModeIconDropdown size="medium" />
             <IconButton aria-label="Menu button" onClick={toggleDrawer(true)}>
@@ -98,18 +97,11 @@ export default function AppAppBar() {
               open={open}
               onClose={toggleDrawer(false)}
               PaperProps={{
-                sx: {
-                  top: 'var(--template-frame-height, 0px)',
-                },
+                sx: { top: 'var(--template-frame-height, 0px)' },
               }}
             >
               <Box sx={{ p: 2, backgroundColor: 'background.default' }}>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'flex-end',
-                  }}
-                >
+                <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                   <IconButton onClick={toggleDrawer(false)}>
                     <CloseRoundedIcon />
                   </IconButton>
@@ -122,12 +114,24 @@ export default function AppAppBar() {
                 <MenuItem>Blog</MenuItem>
                 <Divider sx={{ my: 3 }} />
                 <MenuItem>
-                  <Button color="primary" variant="contained" fullWidth>
+                  <Button
+                    component={RouterLink}
+                    to="/signup"
+                    color="primary"
+                    variant="contained"
+                    fullWidth
+                  >
                     Sign up
                   </Button>
                 </MenuItem>
                 <MenuItem>
-                  <Button color="primary" variant="outlined" fullWidth>
+                  <Button
+                    component={RouterLink}
+                    to="/signin"
+                    color="primary"
+                    variant="outlined"
+                    fullWidth
+                  >
                     Sign in
                   </Button>
                 </MenuItem>
