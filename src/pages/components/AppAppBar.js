@@ -72,7 +72,7 @@ export default function AppAppBar() {
               variant="text"
               size="small"
             >
-              Sign in
+              로그인
             </Button>
             <Button
               component={RouterLink}
@@ -81,7 +81,7 @@ export default function AppAppBar() {
               variant="contained"
               size="small"
             >
-              Sign up
+              회원가입
             </Button>
             <ColorModeIconDropdown />
           </Box>
@@ -121,7 +121,7 @@ export default function AppAppBar() {
                     variant="contained"
                     fullWidth
                   >
-                    Sign up
+                    회원가입
                   </Button>
                 </MenuItem>
                 <MenuItem>
@@ -132,7 +132,7 @@ export default function AppAppBar() {
                     variant="outlined"
                     fullWidth
                   >
-                    Sign in
+                    로그인
                   </Button>
                 </MenuItem>
               </Box>
