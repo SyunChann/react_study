@@ -82,7 +82,7 @@ export default function SignUp(props) {
 
     if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
       setEmailError(true);
-      setEmailErrorMessage('Please enter a valid email address.');
+      setEmailErrorMessage('유효한 이메일 주소를 입력해 주세요.');
       isValid = false;
     } else {
       setEmailError(false);
@@ -91,7 +91,7 @@ export default function SignUp(props) {
 
     if (!password.value || password.value.length < 6) {
       setPasswordError(true);
-      setPasswordErrorMessage('Password must be at least 6 characters long.');
+      setPasswordErrorMessage('비밀번호는 최소 6자 이상이어야 합니다.');
       isValid = false;
     } else {
       setPasswordError(false);
@@ -100,7 +100,7 @@ export default function SignUp(props) {
 
     if (!name.value || name.value.length < 1) {
       setNameError(true);
-      setNameErrorMessage('Name is required.');
+      setNameErrorMessage('이름은 필수입니다.');
       isValid = false;
     } else {
       setNameError(false);
@@ -130,7 +130,7 @@ export default function SignUp(props) {
       });
   
       alert(response.data.message); // ✅ "회원가입 성공" 메시지 출력
-      navigate('/'); // navigate로 router에 등록된 메인 이동
+      navigate('/signin'); // navigate로 router에 등록된 메인 이동
     } catch (error) {
       console.error('회원가입 실패:', error.response?.data || error.message);
       alert(error.response?.data?.message || '회원가입 중 오류가 발생했습니다.');
@@ -203,7 +203,7 @@ export default function SignUp(props) {
             </FormControl>
             <FormControlLabel
               control={<Checkbox value="allowExtraEmails" color="primary" />}
-              label="I want to receive updates via email."
+              label="이메일로 업데이트 된 최신정보를를 받고 싶습니다."
             />
             <Button
               type="submit"

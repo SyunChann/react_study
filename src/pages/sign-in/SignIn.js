@@ -97,7 +97,7 @@ export default function SignIn(props) {
       localStorage.setItem('token', token);
 
       alert('로그인 성공!');
-      navigate('/Home');
+      navigate('/');
 
     } catch (err) {
       console.error('로그인 실패:', err.response?.data || err.message);

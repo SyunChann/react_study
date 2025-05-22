@@ -34,12 +34,13 @@ function GoogleRedirect() {
             alert('알 수 없는 상태입니다.');
         }
 
+        const targetPath = status === 'new' || status === 'exists' ? '/signin' : '/';
         if (window.opener && !window.opener.closed) {
           window.opener.localStorage.setItem('token', token);
-          window.opener.location.href = '/';
+          window.opener.location.href = targetPath;
           window.close();
         } else {
-          navigate('/');
+          navigate(targetPath);
         }
         
       })
@@ -53,7 +54,7 @@ function GoogleRedirect() {
         }
 
         window.close?.();
-        navigate('/');
+        navigate('/signin');
       });
   }, [navigate]);
 
