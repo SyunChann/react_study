@@ -14,6 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import ColorModeIconDropdown from '../shared-theme/ColorModeIconDropdown';
 import Sitemark from './SitemarkIcon';
+import { useNavigate } from 'react-router-dom';
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: 'flex',
@@ -33,9 +34,31 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 
 export default function AppAppBar() {
   const [open, setOpen] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token);
+
+    const handleStorageChange = () => {
+      setIsLoggedIn(!!localStorage.getItem('token'));
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+    navigate('/signin');
   };
 
   return (
@@ -65,24 +88,48 @@ export default function AppAppBar() {
 
           {/* desktop sign in / sign up */}
           <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1, alignItems: 'center' }}>
-            <Button
-              component={RouterLink}
-              to="/signin"
-              color="primary"
-              variant="text"
-              size="small"
-            >
-              Sign in
-            </Button>
-            <Button
-              component={RouterLink}
-              to="/signup"
-              color="primary"
-              variant="contained"
-              size="small"
-            >
-              Sign up
-            </Button>
+            {isLoggedIn ? (
+              <>
+                <Button
+                  component={RouterLink}
+                  to="/mypage"
+                  color="primary"
+                  variant="text"
+                  size="small"
+                >
+                  My Page
+                </Button>
+                <Button
+                  onClick={handleLogout}
+                  color="primary"
+                  variant="contained"
+                  size="small"
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  component={RouterLink}
+                  to="/signin"
+                  color="primary"
+                  variant="text"
+                  size="small"
+                >
+                  Sign in
+                </Button>
+                <Button
+                  component={RouterLink}
+                  to="/signup"
+                  color="primary"
+                  variant="contained"
+                  size="small"
+                >
+                  Sign up
+                </Button>
+              </>
+            )}
             <ColorModeIconDropdown />
           </Box>
 
@@ -113,28 +160,56 @@ export default function AppAppBar() {
                 <MenuItem>FAQ</MenuItem>
                 <MenuItem>Blog</MenuItem>
                 <Divider sx={{ my: 3 }} />
-                <MenuItem>
-                  <Button
-                    component={RouterLink}
-                    to="/signup"
-                    color="primary"
-                    variant="contained"
-                    fullWidth
-                  >
-                    Sign up
-                  </Button>
-                </MenuItem>
-                <MenuItem>
-                  <Button
-                    component={RouterLink}
-                    to="/signin"
-                    color="primary"
-                    variant="outlined"
-                    fullWidth
-                  >
-                    Sign in
-                  </Button>
-                </MenuItem>
+                {isLoggedIn ? (
+                  <>
+                    <MenuItem>
+                      <Button
+                        component={RouterLink}
+                        to="/mypage"
+                        color="primary"
+                        variant="contained"
+                        fullWidth
+                      >
+                        My Page
+                      </Button>
+                    </MenuItem>
+                    <MenuItem>
+                      <Button
+                        onClick={handleLogout}
+                        color="primary"
+                        variant="outlined"
+                        fullWidth
+                      >
+                        Logout
+                      </Button>
+                    </MenuItem>
+                  </>
+                ) : (
+                  <>
+                    <MenuItem>
+                      <Button
+                        component={RouterLink}
+                        to="/signup"
+                        color="primary"
+                        variant="contained"
+                        fullWidth
+                      >
+                        Sign up
+                      </Button>
+                    </MenuItem>
+                    <MenuItem>
+                      <Button
+                        component={RouterLink}
+                        to="/signin"
+                        color="primary"
+                        variant="outlined"
+                        fullWidth
+                      >
+                        Sign in
+                      </Button>
+                    </MenuItem>
+                  </>
+                )}
               </Box>
             </Drawer>
           </Box>

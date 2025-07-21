@@ -5,6 +5,7 @@ import SignIn from "./pages/sign-in/SignIn";
 import SignUp from "./pages/sign-up/SignUp";
 import KakaoRedirect from './pages/redirect/kakaoRedirect';
 import GoogleRedirect from './pages/redirect/googleRedirect'
+import MyPage from './pages/MyPage/MyPage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/kakao-redirect" element={<KakaoRedirect />} />
         <Route path="/google-redirect" element={<GoogleRedirect />} />
+        <Route path="/mypage" element={<MyPage />} />
       </Routes>
     </Router>
   );
