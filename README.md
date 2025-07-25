@@ -91,11 +91,11 @@ src/
 ```
 
 ## 📜 주요 기능 (Features)
-✅ Redux 및 Redux Toolkit을 통한 전역 상태 관리
-✅ React Router를 활용한 페이지 이동
-✅ API 연동을 통한 동적 데이터 렌더링 (Fetch/Axios)
-✅ 반응형 디자인 구현 (Flexbox/Grid, CSS Media Queries)
-✅ 다크모드 지원 (Styled-Components 활용)
+✅ Redux 및 Redux Toolkit을 통한 전역 상태 관리  
+✅ React Router를 활용한 페이지 이동  
+✅ API 연동을 통한 동적 데이터 렌더링 (Fetch/Axios)  
+✅ 반응형 디자인 구현 (Flexbox/Grid, CSS Media Queries)  
+✅ 다크모드 지원 (Styled-Components 활용) 
 
 ---
 
