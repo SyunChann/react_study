@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
+import { login } from '../../features/auth/authSlice';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
@@ -71,7 +73,8 @@ export default function SignIn(props) {
   const [passwordError, setPasswordError] = React.useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
   const [open, setOpen] = React.useState(false);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -87,18 +90,18 @@ export default function SignIn(props) {
 
     const data = new FormData(event.currentTarget);
     try {
-
       const res = await axios.post('http://localhost:5000/api/login', {
         email: data.get('email'),
         password: data.get('password'),
       });
 
-      const { token } = res.data;
+      const { token, user } = res.data;
       localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
+      dispatch(login(user));
 
       alert('로그인 성공!');
       navigate('/');
-
     } catch (err) {
       console.error('로그인 실패:', err.response?.data || err.message);
       alert(err.response?.data?.message || '로그인 중 오류가 발생했습니다.');
@@ -238,7 +241,7 @@ export default function SignIn(props) {
               KaKao로 로그인하기
             </Button>
             <Typography sx={{ textAlign: "center" }}>
-              계정이 없으신 분은 이쪽으로 → {" "}
+              계정이 없으신 분은 이쪽으로 →{' '}
               <Link component={RouterLink} to="/signup" variant="body2">
                 회원가입
               </Link>

@@ -134,6 +134,9 @@ export default function SignUp(props) {
     } catch (error) {
       console.error('회원가입 실패:', error.response?.data || error.message);
       alert(error.response?.data?.message || '회원가입 중 오류가 발생했습니다.');
+      if (error.response?.data?.status === 'exists') {
+        navigate('/signin');
+      }
     }
   };
 
