@@ -22,8 +22,9 @@ import ColorModeSelect from '../shared-theme/ColorModeSelect.js';
 import { GoogleIcon, SitemarkIcon } from '../components/CustomIcons.js';
 import { Link as RouterLink } from "react-router-dom";
 import axios from 'axios';
-import { KakaoAuth } from '../../util/kakaoAuth.js';
+import { showNotification } from '../../features/ui/notificationSlice';
 import { GoogleAuth } from '../../util/googleAuth.js';
+import { KakaoAuth } from '../../util/kakaoAuth.js';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -90,21 +91,29 @@ export default function SignIn(props) {
 
     const data = new FormData(event.currentTarget);
     try {
-      const res = await axios.post('http://localhost:5000/api/login', {
-        email: data.get('email'),
-        password: data.get('password'),
+      const res = await axios.post("http://localhost:5000/api/login", {
+        email: data.get("email"),
+        password: data.get("password"),
       });
 
       const { token, user } = res.data;
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
       dispatch(login(user));
 
-      alert('로그인 성공!');
-      navigate('/');
+      dispatch(
+        showNotification({ message: "로그인 성공!", severity: "success" })
+      );
+      navigate("/");
     } catch (err) {
-      console.error('로그인 실패:', err.response?.data || err.message);
-      alert(err.response?.data?.message || '로그인 중 오류가 발생했습니다.');
+      console.error("로그인 실패:", err.response?.data || err.message);
+      dispatch(
+        showNotification({
+          message:
+            err.response?.data?.message || "로그인 중 오류가 발생했습니다.",
+          severity: "error",
+        })
+      );
     }
   };
 

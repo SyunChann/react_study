@@ -15,6 +15,8 @@ import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import { Link as RouterLink } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { showNotification } from '../../features/ui/notificationSlice';
 import AppTheme from '../shared-theme/AppTheme.js';
 import ColorModeSelect from '../shared-theme/ColorModeSelect.js';
 import { GoogleIcon, SitemarkIcon } from '../components/CustomIcons.js';
@@ -72,6 +74,7 @@ export default function SignUp(props) {
   const [nameError, setNameError] = React.useState(false);
   const [nameErrorMessage, setNameErrorMessage] = React.useState('');
   const navigate = useNavigate(); // 컴포넌트 최상단에서만 호출해야함 !!
+  const dispatch = useDispatch();
 
   const validateInputs = () => {
     const email = document.getElementById('email');
@@ -112,30 +115,45 @@ export default function SignUp(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     if (!validateInputs()) return;
 
     const data = new FormData(event.currentTarget);
     const user = {
-      name: data.get('name'),
-      email: data.get('email'),
-      password: data.get('password'),
+      name: data.get("name"),
+      email: data.get("email"),
+      password: data.get("password"),
     };
-  
+
     try {
-      const response = await axios.post('http://localhost:5000/api/signup', user, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-  
-      alert(response.data.message); // ✅ "회원가입 성공" 메시지 출력
-      navigate('/signin'); // navigate로 router에 등록된 메인 이동
+      const response = await axios.post(
+        "http://localhost:5000/api/signup",
+        user,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      dispatch(
+        showNotification({
+          message: response.data.message,
+          severity: "success",
+        })
+      );
+      navigate("/signin"); // navigate로 router에 등록된 메인 이동
     } catch (error) {
-      console.error('회원가입 실패:', error.response?.data || error.message);
-      alert(error.response?.data?.message || '회원가입 중 오류가 발생했습니다.');
-      if (error.response?.data?.status === 'exists') {
-        navigate('/signin');
+      console.error("회원가입 실패:", error.response?.data || error.message);
+      dispatch(
+        showNotification({
+          message:
+            error.response?.data?.message || "회원가입 중 오류가 발생했습니다.",
+          severity: "error",
+        })
+      );
+      if (error.response?.data?.status === "exists") {
+        navigate("/signin");
       }
     }
   };

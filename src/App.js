@@ -8,6 +8,7 @@ import SignUp from "./pages/sign-up/SignUp";
 import KakaoRedirect from './pages/redirect/kakaoRedirect';
 import GoogleRedirect from './pages/redirect/googleRedirect'
 import MyPage from './pages/MyPage/MyPage';
+import Notifier from "./pages/components/Notifier";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -56,6 +57,7 @@ function App() {
 
   return (
     <Router>
+      <Notifier />
       <Routes>
         <Route path="/" element={isLoggedIn ? <Blog /> : <SignIn />} />
         <Route path="/signin" element={<SignIn />} />
