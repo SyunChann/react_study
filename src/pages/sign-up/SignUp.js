@@ -242,7 +242,7 @@ export default function SignUp(props) {
             <Button
               fullWidth
               variant="outlined"
-              onClick={() => GoogleAuth('signup')}
+              onClick={() => GoogleAuth()}
               startIcon={<GoogleIcon />}
             >
               Google로 회원가입
@@ -250,7 +250,7 @@ export default function SignUp(props) {
             <Button
               fullWidth
               variant="outlined"
-              onClick={() => KakaoAuth('signup')}
+              onClick={() => KakaoAuth()}
               startIcon={
                 <img
                   src="/btn_kakao.svg"

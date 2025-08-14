@@ -230,7 +230,7 @@ export default function SignIn(props) {
             <Button
               fullWidth
               variant="outlined"
-              onClick={() => GoogleAuth('login')}
+              onClick={() => GoogleAuth()}
               startIcon={<GoogleIcon />}
             >
               Google으로 로그인하기
@@ -238,7 +238,7 @@ export default function SignIn(props) {
             <Button
               fullWidth
               variant="outlined"
-              onClick={() => KakaoAuth('login')}
+              onClick={() => KakaoAuth()}
               startIcon={
                 <img
                   src="/btn_kakao.svg"
