@@ -59,7 +59,7 @@ function App() {
     <Router>
       <Notifier />
       <Routes>
-        <Route path="/" element={isLoggedIn ? <Blog /> : <SignIn />} />
+        <Route path="/" element={<Blog />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/kakao-redirect" element={<KakaoRedirect />} />

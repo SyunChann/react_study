@@ -1,9 +1,12 @@
 import * as React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
+import { useNavigate } from "react-router-dom";
 
 export function SitemarkIcon() {
+  const navigate = useNavigate();
   return (
-    <SvgIcon sx={{ height: 21, width: 100 }}>
+    <SvgIcon sx={{ height: 21, width: 100 }}
+             onClick={() => navigate('/')}>
       <svg
         width={86}
         height={19}
