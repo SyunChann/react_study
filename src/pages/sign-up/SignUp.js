@@ -127,7 +127,7 @@ export default function SignUp(props) {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/signup",
+        `${process.env.BACKEND_PORT}/api/signup`,
         user,
         {
           headers: {
