@@ -75,6 +75,7 @@ export default function SignUp(props) {
   const [nameErrorMessage, setNameErrorMessage] = React.useState('');
   const navigate = useNavigate(); // 컴포넌트 최상단에서만 호출해야함 !!
   const dispatch = useDispatch();
+  const baseURL = process.env.REACT_APP_BACKEND_URL;
 
   const validateInputs = () => {
     const email = document.getElementById('email');
@@ -127,7 +128,7 @@ export default function SignUp(props) {
 
     try {
       const response = await axios.post(
-        `${process.env.BACKEND_PORT}/api/signup`,
+        `${baseURL}/api/signup`,
         user,
         {
           headers: {

@@ -76,6 +76,7 @@ export default function SignIn(props) {
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const baseURL = process.env.REACT_APP_BACKEND_URL;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -91,7 +92,7 @@ export default function SignIn(props) {
 
     const data = new FormData(event.currentTarget);
     try {
-      const res = await axios.post(`${process.env.BACKEND_PORT}/api/login`, {
+      const res = await axios.post(`${baseURL}/api/login`, {
         email: data.get("email"),
         password: data.get("password"),
       });
