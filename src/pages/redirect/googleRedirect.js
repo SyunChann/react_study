@@ -5,6 +5,7 @@ import axios from "axios";
 // 이 컴포넌트는 구글 리디렉션을 처리합니다.
 // 인가 코드를 받아 백엔드에 전달하고, 토큰과 사용자 데이터를 받아
 // localStorage에 저장한 후 메인 애플리케이션으로 리디렉션합니다.
+const baseURL = process.env.REACT_APP_BACKEND_URL;
 function GoogleRedirect() {
   const navigate = useNavigate();
 
@@ -23,7 +24,7 @@ function GoogleRedirect() {
     }
 
     axios
-      .post("http://localhost:5000/api/auth/google", { code })
+      .post(`${baseURL}/api/auth/google`, { code })
       .then((res) => {
         const { token, user } = res.data;
 
