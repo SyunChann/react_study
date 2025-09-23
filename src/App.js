@@ -9,6 +9,11 @@ import KakaoRedirect from './pages/redirect/kakaoRedirect';
 import GoogleRedirect from './pages/redirect/googleRedirect'
 import MyPage from './pages/MyPage/MyPage';
 import Notifier from "./pages/components/Notifier";
+import OrderList from "./pages/MyPage/OrderList";
+import Tracking from "./pages/MyPage/Tracking";
+import Refunds from "./pages/MyPage/Refunds";
+import Chat from "./pages/MyPage/Chat";
+import Profile from "./pages/MyPage/Profile";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -64,7 +69,14 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/kakao-redirect" element={<KakaoRedirect />} />
         <Route path="/google-redirect" element={<GoogleRedirect />} />
-        <Route path="/mypage" element={<MyPage />} />
+
+        <Route path="/mypage" element={<MyPage />}>
+          <Route index element={<OrderList/>}/>
+          <Route path="tracking" element={<Tracking />}/>
+          <Route path="refunds" element={<Refunds />} />
+         <Route path="chat" element={<Chat />}/>
+         <Route path="profile" element={<Profile />}/>
+         </Route>
       </Routes>
     </Router>
   );

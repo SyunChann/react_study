@@ -1,27 +1,19 @@
-import * as React from 'react';
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import React from "react";
+import { Outlet } from "react-router-dom";
 
-export default function MyPage() {
-  return (
-    <Container sx={{ mt: 10, mb: 4 }}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          mt: 8,
-          mb: 4,
-        }}
-      >
-        <Typography variant="h3" component="h1" gutterBottom>
-          My Page
-        </Typography>
-        <Typography variant="body1" align="center">
-          Welcome to your personal page!
-        </Typography>
-      </Box>
+import { Box, Container } from "@mui/system";
+import MyPageSidebar from "./MyPageSidebar";
+
+export default function MyPage(){
+  return(
+    <Container maxWidth="lg" sx={{py:3}}>
+
+    <Box sx={{display:"flex",gap:2,minHeight:"70vh"}}>
+    <MyPageSidebar />
+    <Box component="main" sx={{flex:1,px:2,py:1}}>
+      <Outlet />
+    </Box>
+    </Box>
     </Container>
   );
-}
+};
