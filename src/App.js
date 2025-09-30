@@ -9,6 +9,7 @@ import KakaoRedirect from './pages/redirect/kakaoRedirect';
 import GoogleRedirect from './pages/redirect/googleRedirect'
 import MyPage from './pages/MyPage/MyPage';
 import Notifier from "./pages/components/Notifier";
+import AdminProductListPage from "./pages/product/AdminProductListPage";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -65,6 +66,7 @@ function App() {
         <Route path="/kakao-redirect" element={<KakaoRedirect />} />
         <Route path="/google-redirect" element={<GoogleRedirect />} />
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/admin" element={<AdminProductListPage />}/>
       </Routes>
     </Router>
   );
