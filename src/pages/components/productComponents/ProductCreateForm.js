@@ -5,7 +5,7 @@ import { TextField, Button, Box } from '@mui/material';
 
 const baseURL = process.env.REACT_APP_BACKEND_URL;
 
-export default function ProductCreateForm() {
+export default function ProductCreateForm({ onSuccess }) {
     const [form, setForm] = useState({ name: '', price: '', categories: '' });
 
     const handleSubmit = async () => {
@@ -13,6 +13,7 @@ export default function ProductCreateForm() {
             const res = await axios.post(`${baseURL}/api/products`, form);
             alert(res.data.message || '상품 등록 성공');
             setForm({ name: '', price: '', categories: '' }); // 초기화
+            onSuccess?.();// 목록 갱신 트리거 작동
         } catch (err) {
             console.error('상품 등록 에러:', err);
             alert('상품 등록 실패');
