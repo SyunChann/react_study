@@ -14,7 +14,7 @@ import Tracking from "./pages/MyPage/Tracking";
 import Refunds from "./pages/MyPage/Refunds";
 import Chat from "./pages/MyPage/Chat";
 import Profile from "./pages/MyPage/Profile";
-import AdminProductListPage from "./pages/product/AdminProductListPage";
+import AdminProductListPage from "./pages/admin/AdminProductListPage";
 import ProductDetailPage from "./pages/product/ProductDetailPage";
 import NoticeCreate from "./pages/Notice/NoticeCreate";
 import NoticeList from "./pages/Notice/NoticeList";
