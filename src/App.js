@@ -9,6 +9,17 @@ import KakaoRedirect from './pages/redirect/kakaoRedirect';
 import GoogleRedirect from './pages/redirect/googleRedirect'
 import MyPage from './pages/MyPage/MyPage';
 import Notifier from "./pages/components/Notifier";
+import OrderList from "./pages/MyPage/OrderList";
+import Tracking from "./pages/MyPage/Tracking";
+import Refunds from "./pages/MyPage/Refunds";
+import Chat from "./pages/MyPage/Chat";
+import Profile from "./pages/MyPage/Profile";
+import AdminProductListPage from "./pages/product/AdminProductListPage";
+import ProductDetailPage from "./pages/product/ProductDetailPage";
+import NoticeCreate from "./pages/Notice/NoticeCreate";
+import NoticeList from "./pages/Notice/NoticeList";
+import NoticeDetail from "./pages/Notice/NoticeDetail";
+
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -64,7 +75,22 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/kakao-redirect" element={<KakaoRedirect />} />
         <Route path="/google-redirect" element={<GoogleRedirect />} />
-        <Route path="/mypage" element={<MyPage />} />
+
+        <Route path="/admin" element={<AdminProductListPage />}/>
+        <Route path="/product/:id" element={<ProductDetailPage />}/>
+
+           <Route path="/mypage" element={<MyPage />}>
+          <Route index element={<OrderList/>}/>
+          <Route path="tracking" element={<Tracking />}/>
+          <Route path="refunds" element={<Refunds />} />
+         <Route path="chat" element={<Chat />}/>
+         <Route path="profile" element={<Profile />}/>
+         </Route>
+         
+         <Route path = "/notice" element={<NoticeList />}/>
+         <Route path="/notice/create" element={<NoticeCreate />}/>
+         <Route path="/notice/:id" element={<NoticeDetail />}/>
+
       </Routes>
     </Router>
   );
