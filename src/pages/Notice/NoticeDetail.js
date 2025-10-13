@@ -25,6 +25,18 @@ export default function NoticeDetail(){
         fetchNotice();
     },[id]);
 
+    const handleDelete = async () => {
+        try{
+            await axios.delete(`${baseURL}/api/notice/${id}`);
+            alert('삭제 완료')
+            navigate('/notice'); 
+            
+        }catch(err){
+            console.error('삭제 실패',err)
+            alert('삭제 실패');
+        }
+    }
+
      return (
     <Paper sx={{ maxWidth: 800, mx: "auto", p: 4, mt: 4, boxShadow: 3 }}>
       {notice ? (
@@ -60,6 +72,13 @@ export default function NoticeDetail(){
               onClick={() => navigate(`/notice/edit/${notice.notice_id}`)}
             >
               수정
+            </Button>
+            <Button 
+                variant='contained'
+                color='error'
+                onClick={handleDelete}
+            >
+                삭제
             </Button>
           </Stack>
         </>

@@ -21,7 +21,7 @@ export default function  NoticeCreate(){
             navigate('/notice')
    
         }catch(err){
-            console.error('공지 등록 실패:',err);
+            console.error('공지 등록 실패',err);
             alert('공지 등록 실패');
         }
     };

@@ -15,10 +15,11 @@ import Refunds from "./pages/MyPage/Refunds";
 import Chat from "./pages/MyPage/Chat";
 import Profile from "./pages/MyPage/Profile";
 import AdminProductListPage from "./pages/admin/AdminProductListPage";
-import ProductDetailPage from "./pages/product/ProductDetailPage";
+// import ProductDetailPage from "./pages/product/ProductDetailPage";
 import NoticeCreate from "./pages/Notice/NoticeCreate";
 import NoticeList from "./pages/Notice/NoticeList";
 import NoticeDetail from "./pages/Notice/NoticeDetail";
+import NoticeEdit from "./pages/Notice/NoticeEdit";
 
 
 function App() {
@@ -77,7 +78,7 @@ function App() {
         <Route path="/google-redirect" element={<GoogleRedirect />} />
 
         <Route path="/admin" element={<AdminProductListPage />}/>
-        <Route path="/product/:id" element={<ProductDetailPage />}/>
+        {/* <Route path="/product/:id" element={<ProductDetailPage />}/> */}
 
            <Route path="/mypage" element={<MyPage />}>
           <Route index element={<OrderList/>}/>
@@ -90,6 +91,7 @@ function App() {
          <Route path = "/notice" element={<NoticeList />}/>
          <Route path="/notice/create" element={<NoticeCreate />}/>
          <Route path="/notice/:id" element={<NoticeDetail />}/>
+         <Route path="/notice/edit/:id" element={<NoticeEdit />}/>
 
       </Routes>
     </Router>
