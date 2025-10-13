@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Box, Button, CircularProgress, Stack, Typography } from "@mui/material";
-import ProductForm from "../../components/product/ProductForm";
+import ProductForm from "../components/productComponents/ProductForm";
 
 const baseURL = process.env.REACT_APP_BACKEND_URL;
 
@@ -20,18 +20,27 @@ export default function ProductDetailPage() {
     const fetchOne = async () => {
         setLoading(true);
         try {
-        const res = await axios.get(`${baseURL}/api/product/${id}`);
-        setProduct(res.data.data);
+            const res = await axios.get(`${baseURL}/api/products/${id}`);
+            if (res.data?.success === false) {
+                setProduct(null);
+                return;
+                }
+            setProduct(res.data?.data ?? null);
         } catch (e) {
-        console.error("상품 조회 실패:", e);
+            const status = e.response?.status;
+            console.error('상품 조회 실패:', status, e.response?.data || e);
+
+            if (status === 404) {
+            // 없음
+                setProduct(null);
+            } else {
+                alert('상품 조회 중 오류가 발생했습니다.');
+                setProduct(null);
+            }
         } finally {
-        setLoading(false);
+            setLoading(false);
         }
     };
-
-    useEffect(() => {
-        fetchOne();
-    }, [id]);
 
     const handleSave = async (values) => {
         try {
