@@ -7,19 +7,27 @@ import SignIn from "./pages/sign-in/SignIn";
 import SignUp from "./pages/sign-up/SignUp";
 import KakaoRedirect from './pages/redirect/kakaoRedirect';
 import GoogleRedirect from './pages/redirect/googleRedirect'
-import MyPage from './pages/MyPage/MyPage';
+import MyPage from './pages/myPage/MyPage';
 import Notifier from "./pages/components/Notifier";
-import OrderList from "./pages/MyPage/OrderList";
-import Tracking from "./pages/MyPage/Tracking";
-import Refunds from "./pages/MyPage/Refunds";
-import Chat from "./pages/MyPage/Chat";
-import Profile from "./pages/MyPage/Profile";
+import OrderList from "./pages/myPage/OrderList";
+import Tracking from "./pages/myPage/Tracking";
+import Refunds from "./pages/myPage/Refunds";
+import Chat from "./pages/myPage/Chat";
+import Profile from "./pages/myPage/Profile";
 import AdminProductListPage from "./pages/admin/AdminProductListPage";
+
+import NoticeCreate from "./pages/notice/NoticeCreate";
+import NoticeEdit from "./pages/notice/NoticeEdit";
 // import ProductDetailPage from "./pages/product/ProductDetailPage";
-import NoticeCreate from "./pages/Notice/NoticeCreate";
-import NoticeList from "./pages/Notice/NoticeList";
-import NoticeDetail from "./pages/Notice/NoticeDetail";
-import NoticeEdit from "./pages/Notice/NoticeEdit";
+import NoticeList from './pages/notice/NoticeList';
+import Cart from "./pages/cart/Cart";
+
+
+
+
+
+
+
 
 
 function App() {
@@ -90,9 +98,10 @@ function App() {
          
          <Route path = "/notice" element={<NoticeList />}/>
          <Route path="/notice/create" element={<NoticeCreate />}/>
-         <Route path="/notice/:id" element={<NoticeDetail />}/>
+         <Route path="/notice/:id" element={<NoticeEdit />}/>
          <Route path="/notice/edit/:id" element={<NoticeEdit />}/>
 
+         <Route path="/cart" element={<Cart />}/>
       </Routes>
     </Router>
   );

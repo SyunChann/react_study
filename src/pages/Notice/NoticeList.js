@@ -24,6 +24,7 @@ export default function NoticeList() {
         };
         fetchNotice();
     },[]);
+   
 
      return (
     <Stack spacing={2}>
@@ -51,7 +52,7 @@ export default function NoticeList() {
               <TableRow key={n.notice_id} hover component={Link} to={`/notice/${n.notice_id}`} style={{ textDecoration: "none", color: "inherit" }}>
                 <TableCell>{n.notice_id}</TableCell>
                 <TableCell>{n.title}</TableCell>
-                <TableCell>{new Date(n.created_at+"Z").toLocaleString("ko-KR",{ timeZone: "Asia/Seoul"})}</TableCell>
+                <TableCell>{new Date(n.created_at).toLocaleString("ko-KR",{ timeZone: "Asia/Seoul"})}</TableCell>
                 <TableCell>{n.updated_at ? new Date(n.updated_at).toLocaleString("ko-KR",{ timeZone: "Asia/Seoul"}):""}</TableCell>
               </TableRow>
             ))}
