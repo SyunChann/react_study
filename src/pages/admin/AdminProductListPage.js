@@ -15,7 +15,7 @@ export default function AdminProductListPage() {
     };
 
     return (
-        <Box sx={{ p: 4 }}>
+        <Box>
         <h1>상품 관리</h1>
 
         <Button

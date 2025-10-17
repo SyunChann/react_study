@@ -19,6 +19,9 @@ import ProductDetailPage from "./pages/product/ProductDetailPage";
 import NoticeCreate from "./pages/Notice/NoticeCreate";
 import NoticeList from "./pages/Notice/NoticeList";
 import NoticeDetail from "./pages/Notice/NoticeDetail";
+import NavLayout from "./pages/layouts/NavLayout";
+import AppTheme from "./pages/shared-theme/AppTheme";
+import { CssBaseline } from "@mui/material";
 
 
 function App() {
@@ -67,32 +70,38 @@ function App() {
   }, [dispatch, isLoggedIn]); // 의존성 배열: 필요한 경우에만 effect 실행
 
   return (
-    <Router>
-      <Notifier />
-      <Routes>
-        <Route path="/" element={<Blog />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/kakao-redirect" element={<KakaoRedirect />} />
-        <Route path="/google-redirect" element={<GoogleRedirect />} />
+    <AppTheme>
+      <CssBaseline enableColorScheme />
+      <Router>
+        <Notifier />
+        <Routes>
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
 
-        <Route path="/admin" element={<AdminProductListPage />}/>
-        <Route path="/product/:id" element={<ProductDetailPage />}/>
+          <Route element={<NavLayout />}>
+            <Route path="/" element={<Blog />} />
+            <Route path="/kakao-redirect" element={<KakaoRedirect />} />
+            <Route path="/google-redirect" element={<GoogleRedirect />} />
 
-           <Route path="/mypage" element={<MyPage />}>
-          <Route index element={<OrderList/>}/>
-          <Route path="tracking" element={<Tracking />}/>
-          <Route path="refunds" element={<Refunds />} />
-         <Route path="chat" element={<Chat />}/>
-         <Route path="profile" element={<Profile />}/>
-         </Route>
-         
-         <Route path = "/notice" element={<NoticeList />}/>
-         <Route path="/notice/create" element={<NoticeCreate />}/>
-         <Route path="/notice/:id" element={<NoticeDetail />}/>
+            <Route path="/admin" element={<AdminProductListPage />}/>
+            <Route path="/product/:id" element={<ProductDetailPage />}/>
 
-      </Routes>
-    </Router>
+              <Route path="/mypage" element={<MyPage />}>
+              <Route index element={<OrderList/>}/>
+              <Route path="tracking" element={<Tracking />}/>
+              <Route path="refunds" element={<Refunds />} />
+            <Route path="chat" element={<Chat />}/>
+            <Route path="profile" element={<Profile />}/>
+            </Route>
+            
+            <Route path = "/notice" element={<NoticeList />}/>
+            <Route path="/notice/create" element={<NoticeCreate />}/>
+            <Route path="/notice/:id" element={<NoticeDetail />}/>
+          </Route>
+
+        </Routes>
+      </Router>
+    </AppTheme>
   );
 }
 
