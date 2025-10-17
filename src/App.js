@@ -21,15 +21,6 @@ import NoticeEdit from "./pages/notice/NoticeEdit";
 // import ProductDetailPage from "./pages/product/ProductDetailPage";
 import NoticeList from './pages/notice/NoticeList';
 import Cart from "./pages/cart/Cart";
-
-
-
-
-
-
-
-
-
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
