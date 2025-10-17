@@ -37,8 +37,12 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 export default function AppAppBar() {
   const [open, setOpen] = React.useState(false);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  console.log('[Nav user]', user);      
+
+  // console.log('유저이름:', user.name);
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -72,7 +76,7 @@ export default function AppAppBar() {
               <Button variant="text" color="info" size="small">Highlights</Button>
               <Button variant="text" color="info" size="small">Pricing</Button>
               <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }}>FAQ</Button>
-              <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }}>Blog</Button>
+              <Button component={RouterLink} variant="text" color="info" size="small" sx={{ minWidth: 0 }} to="/admin" >admin</Button>
             </Box>
           </Box>
 
@@ -87,7 +91,7 @@ export default function AppAppBar() {
                   variant="text"
                   size="small"
                 >
-                  My Page
+                  {user.name + '님'}
                 </Button>
                 <Button
                   onClick={handleLogout}

@@ -15,12 +15,15 @@ import Refunds from "./pages/myPage/Refunds";
 import Chat from "./pages/myPage/Chat";
 import Profile from "./pages/myPage/Profile";
 import AdminProductListPage from "./pages/admin/AdminProductListPage";
-
 import NoticeCreate from "./pages/notice/NoticeCreate";
 import NoticeEdit from "./pages/notice/NoticeEdit";
 import ProductDetailPage from "./pages/product/ProductDetailPage";
+import NavLayout from "./pages/layouts/NavLayout";
+import AppTheme from "./pages/shared-theme/AppTheme";
+import { CssBaseline } from "@mui/material";
 import NoticeList from './pages/notice/NoticeList';
 import Cart from "./pages/cart/Cart";
+import NoticeDetail from './pages/notice/NoticeDetail';
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
@@ -67,35 +70,52 @@ function App() {
   }, [dispatch, isLoggedIn]); // 의존성 배열: 필요한 경우에만 effect 실행
 
   return (
+  <AppTheme>
+    <CssBaseline enableColorScheme />
     <Router>
       <Notifier />
       <Routes>
-        <Route path="/" element={<Blog />} />
+
+        {/* 인증 */}
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/kakao-redirect" element={<KakaoRedirect />} />
-        <Route path="/google-redirect" element={<GoogleRedirect />} />
 
-        <Route path="/admin" element={<AdminProductListPage />}/>
-        <Route path="/product/:id" element={<ProductDetailPage />}/>
+        {/* 공통 레이아웃 */}
+        <Route element={<NavLayout />}>
 
-           <Route path="/mypage" element={<MyPage />}>
-          <Route index element={<OrderList/>}/>
-          <Route path="tracking" element={<Tracking />}/>
-          <Route path="refunds" element={<Refunds />} />
-         <Route path="chat" element={<Chat />}/>
-         <Route path="profile" element={<Profile />}/>
-         </Route>
-         
-         <Route path = "/notice" element={<NoticeList />}/>
-         <Route path="/notice/create" element={<NoticeCreate />}/>
-         <Route path="/notice/:id" element={<NoticeEdit />}/>
-         <Route path="/notice/edit/:id" element={<NoticeEdit />}/>
+          {/* 메인 */}
+          <Route path="/" element={<Blog />} />
+          <Route path="/kakao-redirect" element={<KakaoRedirect />} />
+          <Route path="/google-redirect" element={<GoogleRedirect />} />
 
-         <Route path="/cart" element={<Cart />}/>
+          {/* 관리자 / 상품 */}
+          <Route path="/admin" element={<AdminProductListPage />} />
+          <Route path="/product/:id" element={<ProductDetailPage />} />
+
+          {/* 마이페이지 */}
+          <Route path="/mypage" element={<MyPage />}>
+            <Route index element={<OrderList />} />
+            <Route path="tracking" element={<Tracking />} />
+            <Route path="refunds" element={<Refunds />} />
+            <Route path="chat" element={<Chat />} />
+            <Route path="profile" element={<Profile />} />
+          </Route>
+
+          {/* 공지사항 */}
+          <Route path="/notice" element={<NoticeList />} />
+          <Route path="/notice/create" element={<NoticeCreate />} />
+          <Route path="/notice/:id" element={<NoticeDetail />} />
+          <Route path="/notice/edit/:id" element={<NoticeEdit />} />
+
+          {/* 장바구니 */}
+          <Route path="/cart" element={<Cart />} />
+
+        </Route>
       </Routes>
     </Router>
-  );
+  </AppTheme>
+);
+
 }
 
 export default App;
