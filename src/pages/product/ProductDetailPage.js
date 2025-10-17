@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Box, Button, CircularProgress, Stack, Typography } from "@mui/material";
 import ProductForm from "../components/productComponents/ProductForm";
+import PurchaseModal from "../components/PurchaseModal";
 
 const baseURL = process.env.REACT_APP_BACKEND_URL;
 
@@ -13,6 +14,7 @@ export default function ProductDetailPage() {
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [editMode, setEditMode] = useState(false);
+    const [open, setOpen] = useState(false);
 
     // 관리자 권한 여부 (예시: 추후 auth 연동)
     const isAdmin = true;
@@ -45,6 +47,7 @@ export default function ProductDetailPage() {
 
     useEffect(() => {
         fetchOne();
+        console.log('상품id 확인:', id);
     }, [id]);
 
     const handleSave = async (values) => {
@@ -107,6 +110,11 @@ export default function ProductDetailPage() {
             <Button variant="outlined" onClick={() => navigate(-1)}>
                 목록으로
             </Button>
+            <Button onClick={() => setOpen(true)}>
+            구매
+            </Button>
+
+            <PurchaseModal open = {open} onClose = {() => setOpen(false)} product={product}/>
             </Stack>
         )}
         </Box>

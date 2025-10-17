@@ -18,7 +18,7 @@ import AdminProductListPage from "./pages/admin/AdminProductListPage";
 
 import NoticeCreate from "./pages/notice/NoticeCreate";
 import NoticeEdit from "./pages/notice/NoticeEdit";
-// import ProductDetailPage from "./pages/product/ProductDetailPage";
+import ProductDetailPage from "./pages/product/ProductDetailPage";
 import NoticeList from './pages/notice/NoticeList';
 import Cart from "./pages/cart/Cart";
 function App() {
@@ -77,7 +77,7 @@ function App() {
         <Route path="/google-redirect" element={<GoogleRedirect />} />
 
         <Route path="/admin" element={<AdminProductListPage />}/>
-        {/* <Route path="/product/:id" element={<ProductDetailPage />}/> */}
+        <Route path="/product/:id" element={<ProductDetailPage />}/>
 
            <Route path="/mypage" element={<MyPage />}>
           <Route index element={<OrderList/>}/>
