@@ -19,8 +19,9 @@ export default function ProductDetailPage() {
 
     const fetchOne = async () => {
         setLoading(true);
+        console.log('🔍 요청 URL:', `${baseURL}/api/products/${id}`);
         try {
-            const res = await axios.get(`${baseURL}/api/products/${id}`);
+            const res = await axios.get(`${baseURL}/api/products/${id}`, { timeout: 5000});
             if (res.data?.success === false) {
                 setProduct(null);
                 return;
@@ -41,6 +42,10 @@ export default function ProductDetailPage() {
             setLoading(false);
         }
     };
+
+    useEffect(() => {
+        fetchOne();
+    }, [id]);
 
     const handleSave = async (values) => {
         try {
