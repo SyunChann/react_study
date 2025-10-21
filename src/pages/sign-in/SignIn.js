@@ -101,6 +101,9 @@ export default function SignIn(props) {
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
       dispatch(login(user));
+      
+      //로그인시 해더 설정
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
       dispatch(
         showNotification({ message: "로그인 성공!", severity: "success" })

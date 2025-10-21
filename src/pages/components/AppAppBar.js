@@ -17,6 +17,7 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import ColorModeIconDropdown from '../shared-theme/ColorModeIconDropdown';
 import { SitemarkIcon } from '../components/CustomIcons.js';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: 'flex',
@@ -40,6 +41,7 @@ export default function AppAppBar() {
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isAdmin = user?.role === 'ADMIN';
   console.log('[Nav user]', user);      
 
   // console.log('유저이름:', user.name);
@@ -51,6 +53,7 @@ export default function AppAppBar() {
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    delete axios.defaults.headers.common['Authorization'];
     dispatch(logout());
     navigate('/signin');
   };
@@ -76,8 +79,10 @@ export default function AppAppBar() {
               <Button variant="text" color="info" size="small">Highlights</Button>
               <Button variant="text" color="info" size="small">Pricing</Button>
               <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }}>FAQ</Button>
-              <Button component={RouterLink} variant="text" color="info" size="small" sx={{ minWidth: 0 }} to="/admin" >admin</Button>
-            </Box>
+              {isAdmin && (
+                <Button component={RouterLink} variant="text" color="info" size="small" sx={{ minWidth: 0 }} to="/admin" >admin</Button>
+              )}
+                </Box>
           </Box>
 
           {/* desktop sign in / sign up */}
