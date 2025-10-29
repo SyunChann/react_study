@@ -83,7 +83,7 @@
       <Router>
         <Notifier />
         <Routes>
-          {/* 인증 페이지 */}
+          {/* 로그인 후 이용 불가 페이지 */}
           <Route element={<GuestOnlyGuardLayout />}>
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
