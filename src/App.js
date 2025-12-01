@@ -9,7 +9,7 @@
   import GoogleRedirect from './pages/redirect/googleRedirect'
   import MyPage from './pages/myPage/MyPage';
   import Notifier from "./pages/components/Notifier";
-  import OrderList from "./pages/myPage/OrderList";
+  // import OrderList from "./pages/myPage/OrderList";
   import Tracking from "./pages/myPage/Tracking";
   import Refunds from "./pages/myPage/Refunds";
   import Chat from "./pages/myPage/Chat";
@@ -26,6 +26,10 @@
   import NoticeDetail from './pages/notice/NoticeDetail';
   import axios from "axios";
   import { AuthGuardLayout, AdminGuardLayout, GuestOnlyGuardLayout } from "./guards/guardLayouts";
+import AddressForm from "./pages/components/order/AddressForm";
+import OrderCreate from "./pages/order/OrderCreate";
+import OrderList from "./pages/order/OrderList";
+import OrderDetail from "./pages/order/OrderDetail";
 
   function App() {
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -100,6 +104,11 @@
             <Route path="/cart" element={<Cart />} />
             <Route path="/kakao-redirect" element={<KakaoRedirect />} />
             <Route path="/google-redirect" element={<GoogleRedirect />} />
+           
+            <Route path="/order/create" element={<OrderCreate />}/>
+            <Route path="/order/list" element={<OrderList />}/>
+            <Route path="/order/:orderId" element={<OrderDetail />}/>
+            
 
             {/* 로그인 전용 구역: 여기 아래는 전부 로그인 필요 */}
             <Route element={<AuthGuardLayout />}>
@@ -112,9 +121,9 @@
               </Route>
             </Route>
 
+              <Route path="/admin" element={<AdminProductListPage />} />
             {/* 관리자 전용 구역: 여기 아래는 전부 로그인+ADMIN 필요 */}
             <Route element={<AdminGuardLayout />}>
-              <Route path="/admin" element={<AdminProductListPage />} />
               <Route path="/notice/create" element={<NoticeCreate />} />
               <Route path="/notice/edit/:id" element={<NoticeEdit />} />
             </Route>

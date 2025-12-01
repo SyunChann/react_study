@@ -2,11 +2,15 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, 
 import { Stack } from '@mui/system';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const baseURL = process.env.REACT_APP_BACKEND_URL;
 
 export default function PurchaseModal({open,onClose,product}){
     
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+    const user = useSelector((state) => state.auth.user);
+    const userId = user?.id;
     const [qty,setQty] = useState(1);
     const [openAdded,setOpenAdded] = useState(false);
     const openModal = () =>{
@@ -28,7 +32,9 @@ export default function PurchaseModal({open,onClose,product}){
     }
     const addToCart = async () => {
         try{
-        await axios.post(`${baseURL}/api/cart/add`,{productId:product.id,quantity:qty});
+        await axios.post(`${baseURL}/api/cart/add`,{productId:product.id,quantity:qty},
+            {headers:{'X-User-Id':String(userId)}}
+        );
         setOpenAdded(true);
         onClose();
         } catch(err){

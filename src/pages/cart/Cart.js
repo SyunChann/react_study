@@ -12,17 +12,43 @@ import {
   Stack,
   CircularProgress,
 } from "@mui/material";
+import { useSelector } from "react-redux";
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const baseURL = process.env.REACT_APP_BACKEND_URL;
 
 export default function Cart() {
+  const [open, setOpen] = React.useState(false);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const user = useSelector((state) => state.auth.user);
+
+  const userId = user?.id
+
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const authlessHeaders = userId ? { "X-User-Id": String(userId) } : {};
+
+  const [selectItem,setSelectItem] = useState([]);
+  const toggleSelect = (id)=>{
+    setSelectItem((prev)=>
+    prev.includes(id) ? prev.filter((x) => x !== id): [...prev,id]);
+  };
+
+  const toggleSelectAll = () => {
+    if(selectItem.length === cart.length){
+      setSelectItem([]);
+    }else{
+      setSelectItem(cart.map((item)=>item.id));
+    }
+  }
   const fetchCart = async () => {
     try {
-      const res = await axios.get(`${baseURL}/api/cart`);
+      const res = await axios.get(`${baseURL}/api/cart`,{
+        headers: authlessHeaders,
+      });
       setCart(res.data.data || []);
+      setSelectItem((res.data.data || []).map(item => item.id));
     } catch (err) {
       console.error("장바구니 불러오기 실패", err);
     } finally {
@@ -32,7 +58,9 @@ export default function Cart() {
 
   const deleteItem = async (id) => {
     try {
-      await axios.delete(`${baseURL}/api/cart/item`, { data: { cartId: id } });
+      await axios.delete(`${baseURL}/api/cart/item`, {
+        headers: authlessHeaders,
+        data: { cartId: id } });
       fetchCart();
     } catch (err) {
       console.error("상품 삭제 실패", err);
@@ -41,7 +69,9 @@ export default function Cart() {
 
   const clearCart = async () => {
     try {
-      await axios.delete(`${baseURL}/api/cart`);
+      await axios.delete(`${baseURL}/api/cart`,{
+        headers:authlessHeaders,
+      });
       fetchCart();
     } catch (err) {
       console.error("장바구니 비우기 실패", err);
@@ -49,19 +79,34 @@ export default function Cart() {
   };
   const updateQuantity = async (id, newQty) => {
   try {
-    await axios.patch(`${baseURL}/api/cart/item`, { cartId: id, quantity: newQty });
+    await axios.patch(`${baseURL}/api/cart/item`, { cartId: id, quantity: newQty},{headers:authlessHeaders,});
     fetchCart();
   } catch (err) {
     console.error('수량 조절 실패', err);
   }
 };
 
+const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchCart();
-  }, []);
+useEffect(()=>{
+  if(!isLoggedIn || !userId){
+    setLoading(false);
+    return;
+  }
+  fetchCart();
+},[isLoggedIn,userId]);
 
-  const totalPrice = cart.reduce(
+if(!isLoggedIn || !userId){
+  return(
+    <Stack alignItems="center" mt = {10}>
+      <Typography> 로그인 후 이용 가능합니다.</Typography>
+    </Stack>
+  )
+}
+
+  const totalPrice = cart
+  .filter(item => selectItem.includes(item.id))
+  .reduce(
     (sum, item) => sum + (item.product?.price || 0) * item.quantity,
     0
   );
@@ -101,7 +146,7 @@ export default function Cart() {
         )}
       </Stack>
 
-      {/* 본문 */}
+  
       {cart.length === 0 ? (
         <Typography align="center" color="text.secondary" sx={{ py: 8 }}>
           장바구니가 비었습니다.
@@ -111,6 +156,12 @@ export default function Cart() {
           <Table>
             <TableHead>
               <TableRow>
+                <TableCell align="center">
+                  <input type="checkbox" checked={selectItem.length === cart.length && cart.length>0}
+                  onChange={toggleSelectAll}/>
+                </TableCell>
+
+
                 <TableCell>상품명</TableCell>
                 <TableCell align="center">수량</TableCell>
                 <TableCell align="right">가격</TableCell>
@@ -121,6 +172,14 @@ export default function Cart() {
             <TableBody>
               {cart.map((item) => (
                 <TableRow key={item.id}>
+                  <TableCell align="center">
+                    <input 
+                    type="checkbox"
+                    checked={selectItem.includes(item.id)}
+                    onChange={() => toggleSelect(item.id)}
+                    />
+
+                  </TableCell>
                   <TableCell>{item.product?.name}</TableCell>
                   <TableCell align="center">
                 <Stack direction="row" spacing={1} justifyContent="center" alignItems="center">
@@ -178,8 +237,20 @@ export default function Cart() {
               </Typography>
             </Typography>
           </Stack>
+          <Stack direction="row" justifyContent="flex-end" mt={3}>
+            <Button variant="contained"
+            onClick={()=>navigate('/order/create',{
+              state:{
+                selectCartItems:cart.filter(item=> selectItem.includes(item.id))
+              }
+            })} >주문</Button>
+          </Stack>
+          
         </>
+        
       )}
+      
     </Paper>
+  
   );
 }

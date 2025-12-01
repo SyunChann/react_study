@@ -4,8 +4,6 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-
-
 const baseURL = process.env.REACT_APP_BACKEND_URL;
 
 export default function  NoticeCreate(){
